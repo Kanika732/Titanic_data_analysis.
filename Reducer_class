@@ -1,0 +1,14 @@
+public static class Reduce extends Reducer&lt;Text,IntWritable, Text,
+IntWritable&gt; {
+public void reduce(Text key, Iterable&lt;IntWritable&gt; values, Context
+context)
+throws IOException, InterruptedException {
+int sum = 0;
+int l=0;
+for (IntWritable val : values) {
+l+=1;
+sum += val.get();
+}
+sum=sum/l;
+context.write(key, new IntWritable(sum));
+ }
