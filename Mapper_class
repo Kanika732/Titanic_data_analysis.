@@ -1,0 +1,22 @@
+public class Average_age {
+public static class Map extends Mapper&lt;LongWritable, Text, Text,
+IntWritable&gt; {
+private Text gender = new Text();
+private IntWritable age = new IntWritable();
+public void map(LongWritable key, Text value, Context context ) throws
+IOException, InterruptedException {
+   String line = value.toString();
+   String str[]=line.split(&quot;,&quot;);
+         if(str.length&gt;6){
+             gender.set(str[4]);
+
+         if((str[1].equals(&quot;0&quot;)) ){
+            if(str[5].matches(&quot;\\d+&quot;)){
+              int i=Integer.parseInt(str[5]);
+                age.set(i);
+    }
+   }
+}
+    context.write(gender, age);
+  }
+}
